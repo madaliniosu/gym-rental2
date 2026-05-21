@@ -1,4 +1,4 @@
-import { createClient } from "@/lib/supabase/server";
+import { createAdminClient } from "@/lib/supabase/server";
 import { stripe } from "@/lib/stripe";
 import { createTimedKeypadCode } from "@/lib/nuki";
 import { resend } from "@/lib/resend";
@@ -30,7 +30,7 @@ export async function POST(req: NextRequest) {
     const paymentIntent = event.data.object;
     const bookingId = paymentIntent.metadata.booking_id;
 
-    const supabase = await createClient();
+    const supabase = createAdminClient();
 
     const { data: booking } = await supabase
         .from("bookings")
