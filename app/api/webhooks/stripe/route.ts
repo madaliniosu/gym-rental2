@@ -46,11 +46,30 @@ export async function POST(req: NextRequest) {
     }
 
     // Generate Nuki keypad code
-    const { authId, code } = await createTimedKeypadCode(
-        booking.name,
-        new Date(booking.start_time),
-        new Date(booking.end_time),
-    );
+    let authId: number | null = null;
+    let code = "0000";
+
+    try {
+        const nuki = await createTimedKeypadCode(
+            booking.name,
+            new Date(booking.start_time),
+            new Date(booking.end_time),
+        );
+        authId = nuki.authId;
+        code = nuki.code;
+    } catch (err) {
+        console.error("Nuki error:", err);
+    }
+
+    // Confirm booking with code
+    await supabase
+        .from("bookings")
+        .update({
+            status: "confirmed",
+            nuki_auth_id: authId,
+            access_code: code,
+        })
+        .eq("id", bookingId);
 
     // Confirm booking with code
     await supabase
