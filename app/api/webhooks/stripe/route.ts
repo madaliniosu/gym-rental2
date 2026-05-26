@@ -94,5 +94,22 @@ export async function POST(req: NextRequest) {
         }),
     });
 
+    const { error: updateError } = await supabase
+        .from("bookings")
+        .update({
+            status: "confirmed",
+            nuki_auth_id: authId,
+            access_code: code,
+        })
+        .eq("id", bookingId);
+
+    if (updateError) {
+        console.error("Supabase update error:", updateError);
+        return NextResponse.json(
+            { error: "Failed to update booking" },
+            { status: 500 },
+        );
+    }
+
     return NextResponse.json({ received: true });
 }
