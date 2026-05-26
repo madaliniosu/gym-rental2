@@ -1,3 +1,15 @@
+A self-service gym rental platform built as an MVP. Users book hourly time slots, pay online via Stripe, and receive a time-limited door code by email — no staff involvement needed.
+
+Built with Next.js 16 App Router, Supabase, Stripe Webhooks, Resend, and Nuki Smart Lock API. Deployed on Vercel.
+
+Features:
+- Hourly slot booking with real-time availability
+- Stripe PaymentElement with webhook-driven confirmation
+- Automated door code generation via Nuki API
+- Transactional email with React Email + Resend
+- Password-protected admin dashboard
+- Double-booking prevention at the database level
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
