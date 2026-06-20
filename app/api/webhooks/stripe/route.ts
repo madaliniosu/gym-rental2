@@ -71,16 +71,6 @@ export async function POST(req: NextRequest) {
         })
         .eq("id", bookingId);
 
-    // Confirm booking with code
-    await supabase
-        .from("bookings")
-        .update({
-            status: "confirmed",
-            nuki_auth_id: authId,
-            access_code: code,
-        })
-        .eq("id", bookingId);
-
     // Send confirmation email
     await resend.emails.send({
         from: process.env.RESEND_FROM_EMAIL!,
