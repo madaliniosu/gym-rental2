@@ -26,7 +26,13 @@ export default function HomePage() {
       <Separator />
 
       {/* Details */}
-      <section className="grid grid-cols-1 sm:grid-cols-3 gap-4 px-4 py-16 max-w-3xl mx-auto w-full">
+      <section className="grid grid-cols-1 sm:grid-cols-4 gap-4 px-4 py-16 max-w-3xl mx-auto w-full">
+        <Card>
+          <CardContent className="pt-6">
+            <p className="text-sm text-muted-foreground">Location</p>
+            <p className="text-2xl font-semibold mt-1">Carrer de Lluís Peixó 24, Valencia</p>
+          </CardContent>
+        </Card>
         <Card>
           <CardContent className="pt-6">
             <p className="text-sm text-muted-foreground">Price</p>
